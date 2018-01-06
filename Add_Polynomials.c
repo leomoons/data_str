@@ -4,13 +4,6 @@
 */
 
 /*where Polynomial is defined as the following:*/
-typedef struct Node *PtrToNode;
-struct Node {
-    int Coefficient;
-    int Exponent;
-    PtrToNode Next;
-};
-typedef PtrToNode Polynomial;
 /* Nodes are sorted in decreasing order of exponents.*/
 
 /*The function Add is supposed to return a polynomial which is the sum of a and b.*/
@@ -51,26 +44,30 @@ Polynomial Add( Polynomial a, Polynomial b ){
     rtu->Next=NULL;
     a=a->Next;
     b=b->Next;
-    Polynomial temp = rtu->Next;  //set a temp point so that rtu will not change its head to
+    Polynomial temp = rtu;  //set a temp point so that rtu will not change its head to
     while(a&&b){
         Polynomial dev;
         if(a->Exponent>b->Exponent){
       	    dev=a;
 	    a=a->Next;
+	    dev->Next = NULL;
 	}
 	else if(a->Exponent<b->Exponent){
 	    dev=b; 
 	    b=b->Next;
+	    dev->Next = NULL;
 	}
 	else{
+	    dev = (Polynomial)malloc(sizeof(struct Node));
 	    dev->Coefficient=a->Coefficient+b->Coefficient;
             dev->Exponent=a->Exponent;
 	    a=a->Next;
 	    b=b->Next;
+	    dev->Next=NULL;
 	    if(dev->Coefficient==0)
                 continue;
 	}
-	temp=dev;
+	temp->Next=dev;
 	temp=temp->Next;
     }
      while(a){  
@@ -85,4 +82,44 @@ Polynomial Add( Polynomial a, Polynomial b ){
     }  
     temp->Next=NULL;
     return rtu;
+}
+
+
+
+
+/*将多项式读入*/
+
+Polynomial Read( ){
+	int n;
+	Polynomial pol;   				//定义返回的dummy head
+	pol=(Polynomial)malloc(sizeof(struct Node));
+	pol->Next =NULL;
+	Polynomial temp=pol;
+	scanf("%d\n",&n);
+	for(int i=0;i<n;i++){
+		Polynomial dev;
+		dev=(Polynomial)malloc(sizeof(struct Node));
+ 		scanf("%d",dev->Coefficient);
+		scanf("%d",dev->Coefficient);
+		temp->Next=dev;
+		temp=temp->Next;
+		temp->Next = NULL;
+	}
+	return pol;
+}
+
+
+/*将多项式链表写在屏幕上*/
+void Print(Polynomial p){
+	p=p->Next;
+	if(p==NULL){
+		printf("0");
+	}
+	else{
+		while(p!=NULL){
+			printf("%d ",p->Coefficient);
+			printf("%d ",p->Exponent);
+			p=p->Next;
+		}
+	}
 }
