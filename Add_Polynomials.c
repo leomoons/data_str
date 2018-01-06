@@ -95,12 +95,12 @@ Polynomial Read( ){
 	pol=(Polynomial)malloc(sizeof(struct Node));
 	pol->Next =NULL;
 	Polynomial temp=pol;
-	scanf("%d\n",&n);
+	scanf("%d",&n);
 	for(int i=0;i<n;i++){
 		Polynomial dev;
 		dev=(Polynomial)malloc(sizeof(struct Node));
- 		scanf("%d",dev->Coefficient);
-		scanf("%d",dev->Coefficient);
+ 		scanf("%d",&dev->Coefficient);
+		scanf("%d",&dev->Exponent);
 		temp->Next=dev;
 		temp=temp->Next;
 		temp->Next = NULL;
