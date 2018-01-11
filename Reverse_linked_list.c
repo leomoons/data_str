@@ -43,10 +43,10 @@ List Reverse( List L ){
 		rtu->Next=Lold;
 		Lold=temp;
 	}
-	temp=rtu;
-	Lold=L->Next;
+	temp=rtu->Next;
+	Lold=L;
 	while(temp){
-		Lold=temp->Next;
+		Lold->Next=temp;
 		Lold=Lold->Next;
 		temp=temp->Next;
 	}
@@ -62,7 +62,7 @@ List Read(){
 	L->Next=NULL;
 	temp=L;
 	for(int i=0;i<num;i++){
-		temp=(List)malloc(sizeof(struct Node));
+		temp->Next=(List)malloc(sizeof(struct Node));
 		scanf("%d",&(temp->Next->Element));
 		temp=temp->Next;
 	}
