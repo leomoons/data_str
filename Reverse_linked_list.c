@@ -50,6 +50,14 @@ List Reverse( List L ){
 		Lold=Lold->Next;
 		temp=temp->Next;
 	}
+	/*Lold=L->Next;
+	while(temp){
+		Lold=temp;
+		Lold=Lold->Next;
+		temp=temp->Next;
+	}
+	*/
+	/*L=rtu;*/
 	return rtu;
 }
 
